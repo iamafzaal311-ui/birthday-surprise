@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@400;500;600&family=Noto+Nastaliq+Urdu:wght@400;500;600&display=swap"
         rel="stylesheet">
 
     <!-- GSAP -->
@@ -28,11 +28,57 @@
 
 <body>
 
+    <section id="passwordScreen" class="gate-screen">
+        <div class="gate-card">
+            <div class="gate-heart">♥</div>
+            <p class="gate-kicker">A LITTLE SECRET</p>
+            <h1>Enter the magic password</h1>
+            <p class="gate-copy">Only someone very special knows this little secret ✨</p>
+            <form id="passwordForm" class="password-form">
+                <label for="passwordInput">Password</label>
+                <input id="passwordInput" type="password" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="••••" aria-describedby="passwordMessage" required>
+                <button type="submit" class="luxury-btn">Unlock My Surprise ✨</button>
+                <p id="passwordMessage" class="password-message" role="alert"></p>
+            </form>
+        </div>
+    </section>
+
+    <section id="loveDialog" class="love-dialog hidden" role="dialog" aria-modal="true" aria-labelledby="loveQuestion">
+        <div class="love-card">
+            <div class="dialog-sparkle">✦ ♡ ✦</div>
+            <p class="gate-kicker">ONE IMPORTANT QUESTION</p>
+            <h2 id="loveQuestion">Do You Love Me?</h2>
+            <p id="loveHint">Choose wisely, my love 💕</p>
+            <div id="loveOptions" class="love-options">
+                <button type="button" class="love-option yes-option">Yes, lovely 💖</button>
+                <button type="button" class="love-option yes-option">Yes, always 🌸</button>
+                <button type="button" class="love-option yes-option">Of course, darling 💗</button>
+                <button type="button" class="love-option no-option">No 🙈</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="letterPage" class="letter-page hidden" role="dialog" aria-modal="true" aria-labelledby="letterTitle">
+        <article class="realistic-letter">
+            <button id="closeLetter" class="close-letter" type="button" aria-label="Close letter">×</button>
+            <div class="letter-stamp">♡</div>
+            <p class="letter-greeting" id="letterTitle">My dear love</p>
+            <div class="letter-divider">♡♡♡</div>
+            <div class="urdu-letter" lang="ur" dir="rtl">
+                <p>مجھے کسی سے محبت نہیں ہے، تمہارے سوا۔۔۔</p>
+                <p>مجھے کسی کی ضرورت نہیں ہے، تمہارے سوا۔۔۔</p>
+                <p>جو اس دل اور زندگی پر راج کرے کسی اور،</p>
+                <p>کو اجازت نہیں تمہارے سوا جانا۔</p>
+            </div>
+            <p class="letter-signoff">Forever yours ♡</p>
+        </article>
+    </section>
+
     <!-- =========================
        LOADER / INTRO
   ========================== -->
 
-    <section id="intro" class="intro">
+    <section id="intro" class="intro hidden">
 
         <div class="intro-glow glow-one"></div>
         <div class="intro-glow glow-two"></div>
@@ -45,7 +91,7 @@
                 SOMETHING BEAUTIFUL IS WAITING FOR YOU
             </p>
 
-            <div id="envelope" class="envelope">
+            <div id="envelope" class="envelope" role="button" tabindex="0" aria-label="Open love letter">
 
                 <div class="envelope-back"></div>
 
@@ -61,7 +107,7 @@
 
             </div>
 
-            <h1>A Little Surprise<br>Made With Love</h1>
+            <h1>A Little Surprise<br>Made With Love, Samaviya</h1>
 
             <p>
                 Some surprises are bought...
@@ -86,6 +132,7 @@
         <!-- FLOATING PARTICLES -->
 
         <div id="particles"></div>
+        <div id="balloons" aria-label="Floating colorful balloons"></div>
 
 
         <!-- =========================
@@ -102,16 +149,17 @@
                 <span class="hero-date">17 SEPTEMBER ✦ YOUR DAY</span>
 
                 <h1>
-                    Happy Birthday,
-                    <span>My Most Beautiful Chapter</span>
+                    Happiest Birthday, Samaviya
+                    <span>The One Who Owns My Heart</span>
                 </h1>
 
                 <p class="hero-text">
-                    Today isn't just the day you were born...
+                    Today is your day, Samaviya...
                     <br>
-                    It's the day the world unknowingly received someone
-                    who would one day become my entire world.
+                    and I hope it brings you every beautiful moment you deserve.
                 </p>
+
+                <p class="urdu-copy hero-urdu" lang="ur" dir="rtl">تم میرے لیے بہت خاص ہو، میری دنیا تم سے ہے۔</p>
 
                 <div class="scroll-hint">
                     <span></span>
@@ -142,6 +190,8 @@
                 <span>To One Forever</span>
             </h2>
 
+            <p class="couple-names">Samaviya <b>+</b> Usman</p>
+
             <div class="hearts-stage">
 
                 <div class="heart heart-left">♥</div>
@@ -157,11 +207,12 @@
             </div>
 
             <p class="section-description">
-                Two different journeys.
-                Two different stories.
-                And somehow, among billions of people,
-                my heart found its way home in you.
+                Tum se tum tak hi meri duniya hai.
+                <br>
+                My heart found its way home in you.
             </p>
+
+            <p class="urdu-copy section-urdu" lang="ur" dir="rtl">تم سے تم تک ہی میری دنیا ہے۔</p>
 
         </section>
 
@@ -183,53 +234,54 @@
 
             <div class="story-grid">
 
-                <article class="story-card">
+                <article class="story-card" tabindex="0" role="button" aria-expanded="false">
 
                     <div class="chapter-number">01</div>
 
                     <h3>The Beginning</h3>
-
-                    <p>
-                        There was a time when you were simply
-                        someone in my world...
-                        and then, without warning,
-                        you became the world itself.
-                    </p>
-
+                    <span class="chapter-toggle">Open chapter +</span>
+                    <div class="chapter-content">
+                        <p>
+                            There was a time when you were simply
+                            someone in my world...
+                            and then, without warning,
+                            you became the world itself, Samaviya.
+                        </p>
+                        <p class="urdu-copy" lang="ur" dir="rtl">تمہارا خیال ہی میرے لبوں پر مسکراہٹ بکھیر دیتا ہے۔</p>
+                    </div>
                 </article>
 
-
-                <article class="story-card featured">
+                <article class="story-card featured" tabindex="0" role="button" aria-expanded="false">
 
                     <div class="chapter-number">02</div>
 
                     <h3>The Beautiful Moments</h3>
-
-                    <p>
-                        Somewhere between the laughter,
-                        the conversations,
-                        the small moments and the unforgettable ones...
-                        something beautiful began to grow.
-                    </p>
+                    <span class="chapter-toggle">Open chapter +</span>
+                    <div class="chapter-content">
+                        <p>
+                            Somewhere between the laughter and conversations,
+                            I realized I could share everything with you
+                            without the fear of being judged.
+                        </p>
+                    </div>
 
                 </article>
 
 
-                <article class="story-card">
+                <article class="story-card" tabindex="0" role="button" aria-expanded="false">
 
                     <div class="chapter-number">03</div>
 
                     <h3>The Day We Became Us</h3>
-
-                    <p>
-                        And then came the moment when
-                        "you and me"
-                        quietly transformed into
-                        something even more beautiful...
-                        "us."
-                    </p>
-
-                    <div class="mini-ring">💍</div>
+                    <span class="chapter-toggle">Open chapter +</span>
+                    <div class="chapter-content">
+                        <p>
+                            You are someone I can always count on blindly.
+                            <br>
+                            And "you and me" quietly became "us."
+                        </p>
+                        <div class="mini-ring">💍</div>
+                    </div>
 
                 </article>
 
@@ -285,10 +337,10 @@
             </div>
 
             <p class="section-description">
-                I don't just wish you a beautiful year ahead.
+                Till my last breath, I pray that your life is filled
+                with happiness, peace, success and good health.
                 <br>
-                I wish to be present in every beautiful chapter
-                that comes after it.
+                And I hope I get to be present in every chapter ahead.
             </p>
 
         </section>
@@ -308,7 +360,7 @@
                     17 September ✦
                 </p>
 
-                <h2>My Love,</h2>
+                <h2>My Love, Samaviya</h2>
 
                 <div class="handwritten">
 
@@ -322,33 +374,32 @@
                     </p>
 
                     <p>
-                        You came into my life and somehow made ordinary days
-                        feel softer, brighter and more meaningful.
+                        You are the most favorite person in my life,
+                        and your thought alone brings a smile to my lips.
                     </p>
 
                     <p>
-                        And now, after our beautiful engagement,
-                        the future feels even more special...
-                        because when I imagine tomorrow,
-                        I see you in it.
+                        Even when we argue, I realize I cannot imagine
+                        my life without you. I love you more than words
+                        could ever express.
+                    </p>
+
+                    <p class="urdu-copy" lang="ur" dir="rtl">تم سے بہت محبت ہے، الفاظ سے بھی زیادہ۔</p>
+
+                    <p>
+                        You are the one I choose, today and always.
+                        I want to fill your life with every shade of love.
                     </p>
 
                     <p>
-                        I don't promise a life without difficult days.
-                        But I promise that my heart will always try
-                        to make those days easier for you.
-                    </p>
-
-                    <p>
-                        Happy Birthday, my love.
-                        And here's to every birthday I hope
-                        to celebrate beside you.
+                        Happy Birthday, Samaviya.
+                        Here's to every birthday I hope to celebrate beside you.
                     </p>
 
                 </div>
 
                 <div class="signature">
-                    Forever Yours ♡
+                    Forever Yours, Usman ♡
                 </div>
 
             </div>
@@ -447,6 +498,7 @@
                 </p>
 
 
+                <div class="gift-display">
                 <div id="giftBox" class="gift-box">
 
                     <div class="gift-lid">
@@ -471,12 +523,15 @@
 
                 <div id="giftReveal" class="gift-reveal hidden">
 
+                    <div class="gift-treasures">
+
                     <div class="teddy">
                         🧸
                     </div>
 
                     <div class="ring-reveal">
                         💍
+                    </div>
                     </div>
 
                     <h3>
@@ -489,6 +544,7 @@
                         will always be beside you.
                     </p>
 
+                </div>
                 </div>
 
             </div>
@@ -504,23 +560,28 @@
 
             <div class="final-particles"></div>
 
+            <div class="final-confetti confetti-left">✦ ✧ ✦</div>
+            <div class="final-confetti confetti-right">✧ ✦ ✧</div>
+
             <div class="final-ring">
                 💍
             </div>
 
             <h2>
-                Happy Birthday,
+                Happy Birthday, Samaviya,
                 <span>My Love 🤍</span>
             </h2>
 
             <p>
-                May this birthday be the beginning
-                of another beautiful chapter...
+                I love you so much, Samaviya.
+                <br>
+                May this birthday begin another beautiful chapter...
             </p>
 
+            <p class="urdu-copy final-urdu" lang="ur" dir="rtl">تم میری زندگی کی سب سے خوبصورت خوشی ہو۔</p>
+
             <p>
-                And may every chapter after this
-                bring us closer to the forever
+                May every chapter bring us closer to the forever
                 we promised each other.
             </p>
 
@@ -529,8 +590,10 @@
             </h3>
 
             <div class="forever">
-                ♾️ Forever & Always ♾️
+                Samaviya + Usman · ♾️ Forever & Always ♾️
             </div>
+
+            <div class="final-stars">★ ✦ ★ ✦ ★</div>
 
         </section>
 

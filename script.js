@@ -38,8 +38,18 @@ document.addEventListener("DOMContentLoaded", function () {
   const intro = byId("intro");
   const beginBtn = byId("beginBtn");
   const mainContent = byId("mainContent");
+  const passwordScreen = byId("passwordScreen");
+  const passwordForm = byId("passwordForm");
+  const passwordInput = byId("passwordInput");
+  const passwordMessage = byId("passwordMessage");
+  const loveDialog = byId("loveDialog");
+  const loveOptions = byId("loveOptions");
+  const envelope = byId("envelope");
+  const letterPage = byId("letterPage");
+  const closeLetter = byId("closeLetter");
 
   const particles = byId("particles");
+  const balloons = byId("balloons");
 
   const blowBtn = byId("blowBtn");
   const candles = selectAll(".candle");
@@ -54,6 +64,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const hero = select(".hero");
   const heroGlows = selectAll(".hero-glow");
+  const storyCards = selectAll(".story-card");
+
+  function toggleChapter(card) {
+    const isOpen = card.classList.toggle("is-open");
+    card.setAttribute("aria-expanded", String(isOpen));
+    const toggle = card.querySelector(".chapter-toggle");
+    if (toggle) toggle.textContent = isOpen ? "Close chapter -" : "Open chapter +";
+  }
+
+  storyCards.forEach(function (card) {
+    card.addEventListener("click", function () {
+      toggleChapter(card);
+    });
+
+    card.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        toggleChapter(card);
+      }
+    });
+  });
 
   if (hasGSAP) {
     const introItems = selectAll(".intro-content > *");
@@ -70,6 +101,83 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+  }
+
+  function showLoveDialog() {
+    if (!loveDialog) return;
+    loveDialog.classList.remove("hidden");
+  }
+
+  function showMainWebsite() {
+    if (!loveDialog || !intro) return;
+    loveDialog.classList.add("hidden");
+    intro.classList.remove("hidden");
+  }
+
+  function openLetter() {
+    if (!letterPage) return;
+    letterPage.classList.remove("hidden");
+    if (closeLetter) closeLetter.focus();
+  }
+
+  function closeLetterPage() {
+    if (!letterPage) return;
+    letterPage.classList.add("hidden");
+    if (envelope) envelope.focus();
+  }
+
+  if (envelope && letterPage) {
+    envelope.addEventListener("click", openLetter);
+    envelope.addEventListener("keydown", function (event) {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        openLetter();
+      }
+    });
+  }
+
+  if (closeLetter) {
+    closeLetter.addEventListener("click", closeLetterPage);
+  }
+
+  if (passwordForm && passwordInput && passwordScreen && intro) {
+    passwordForm.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      if (passwordInput.value === "1709") {
+        passwordScreen.classList.add("hidden");
+        showLoveDialog();
+      } else {
+        passwordMessage.textContent = "That password is not quite right. Try again 💕";
+        passwordInput.value = "";
+        passwordInput.focus();
+      }
+    });
+  }
+
+  if (loveOptions && loveDialog && intro) {
+    loveOptions.addEventListener("click", function (event) {
+      const option = event.target.closest("button");
+      if (!option) return;
+
+      if (option.classList.contains("yes-option")) {
+        showMainWebsite();
+        return;
+      }
+
+      if (option.classList.contains("try-again-option")) {
+        loveOptions.innerHTML = `
+          <button type="button" class="love-option yes-option">Yes, lovely 💖</button>
+          <button type="button" class="love-option yes-option">Yes, always 🌸</button>
+          <button type="button" class="love-option yes-option">Of course, darling 💗</button>
+          <button type="button" class="love-option no-option">No 🙈</button>`;
+        byId("loveHint").textContent = "Choose wisely, my love 💕";
+        return;
+      }
+
+      loveOptions.innerHTML = '<button type="button" class="love-option try-again-option">Try Again 💞</button>';
+      byId("loveHint").textContent = "Hmm... you only have one choice now 😌";
+    });
   }
 
   if (beginBtn && intro && mainContent) {
@@ -154,6 +262,50 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+  }
+
+  if (balloons) {
+    const balloonColors = ["#ff4f81", "#ffad2f", "#35bdb3", "#9d75e8", "#54a7f7", "#f05bca"];
+
+    function playPopSound() {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContext) return;
+
+      const audioContext = new AudioContext();
+      const oscillator = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+
+      oscillator.type = "triangle";
+      oscillator.frequency.setValueAtTime(520, audioContext.currentTime);
+      oscillator.frequency.exponentialRampToValueAtTime(90, audioContext.currentTime + 0.12);
+      gain.gain.setValueAtTime(0.16, audioContext.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.14);
+      oscillator.connect(gain);
+      gain.connect(audioContext.destination);
+      oscillator.start();
+      oscillator.stop(audioContext.currentTime + 0.14);
+    }
+
+    for (let index = 0; index < 6; index++) {
+      const balloon = document.createElement("button");
+      balloon.type = "button";
+      balloon.className = "balloon";
+      balloon.setAttribute("aria-label", "Pop colorful balloon");
+      balloon.style.left = 3 + Math.random() * 94 + "%";
+      balloon.style.background = balloonColors[index % balloonColors.length];
+      balloon.style.animation = "balloonRise " + (13 + Math.random() * 10) + "s linear " + (Math.random() * 9) + "s infinite";
+
+      balloon.addEventListener("click", function () {
+        if (balloon.classList.contains("pop")) return;
+        balloon.classList.add("pop");
+        playPopSound();
+        setTimeout(function () {
+          balloon.remove();
+        }, 220);
+      });
+
+      balloons.appendChild(balloon);
+    }
   }
 
   function createScrollAnimations() {
