@@ -1272,6 +1272,11 @@ FINAL
         linear-gradient(135deg, #fff0a8, #ffd1e0 48%, #d9c5ff);
 }
 
+.final-section > * {
+    position: relative;
+    z-index: 2;
+}
+
 .final-section::before,
 .final-section::after {
     content: "";
@@ -1308,8 +1313,20 @@ FINAL
 .forever {
     margin-top: 30px;
     font-family: "Caveat", cursive;
-    font-size: 35px;
+    font-size: clamp(26px, 6vw, 35px);
     color: var(--deep-rose);
+    line-height: 1.2;
+    text-align: center;
+}
+
+.forever-names,
+.forever-phrase {
+    display: block;
+}
+
+.forever-phrase {
+    color: var(--rose);
+    font-size: 0.9em;
 }
 
 .final-confetti {
@@ -1632,6 +1649,13 @@ RESPONSIVE
         height: 56px;
     }
 
+    #balloons .balloon:nth-child(1) { left: 2% !important; }
+    #balloons .balloon:nth-child(2) { left: 88% !important; }
+    #balloons .balloon:nth-child(3) { left: 7% !important; }
+    #balloons .balloon:nth-child(4) { left: 84% !important; }
+    #balloons .balloon:nth-child(5) { left: 3% !important; }
+    #balloons .balloon:nth-child(6) { left: 90% !important; }
+
     .intro-content {
         padding: 24px 16px;
     }
@@ -1754,7 +1778,37 @@ RESPONSIVE
 
     .final-section {
         min-height: 100svh;
-        padding: 84px 16px;
+        height: 100svh;
+        padding: 34px 14px 26px;
+        justify-content: flex-start;
+    }
+
+    .final-ring {
+        flex: 0 0 auto;
+        font-size: 52px;
+    }
+
+    .final-section h2 {
+        margin: 4px 0 8px;
+        font-size: clamp(37px, 11vw, 48px);
+    }
+
+    .final-section p {
+        max-width: 340px;
+        margin: 3px 0;
+        font-size: 12px;
+        line-height: 1.35;
+    }
+
+    .final-section .final-urdu {
+        margin: 4px 0;
+        font-size: 17px;
+        line-height: 1.6;
+    }
+
+    .final-section h3 {
+        margin-top: 7px;
+        font-size: 28px;
     }
 
     .final-section h3 {
@@ -1762,7 +1816,15 @@ RESPONSIVE
     }
 
     .forever {
-        font-size: 30px;
+        max-width: 100%;
+        margin-top: 6px;
+        font-size: clamp(23px, 7vw, 28px);
+    }
+
+    .final-stars {
+        margin-top: 5px;
+        font-size: 17px;
+        letter-spacing: 6px;
     }
 
 }
